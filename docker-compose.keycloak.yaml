@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  keycloak_db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    volumes: 
+      - sql_vol:/var/opt/mssql
+    ports:
+      - "1433:1433"
+      - "1434:1434"
+      - "443:443"
+    networks: 
+      - keycloak_net      
+    environment:      
+      SA_PASSWORD: "SqlServer@123"
+      ACCEPT_EULA: "Y"  
+
+  keycloak:
+    image: jboss/keycloak:latest
+    networks: 
+      - keycloak_net
+    restart: always    
+    volumes:
+      - keycloak_vol:/opt/jboss/keycloak/realm-config    
+    environment:
+      DB_VENDOR: mssql
+      DB_ADDR: keycloak_db
+      DB_DATABASE: Keycloak
+      DB_USER: sa
+      DB_PASSWORD: "SqlServer@123"
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: Pa55w0rd
+    ports:
+      - 8080:8080
+    depends_on:
+      - keycloak_db
+
+networks: 
+  keycloak_net:
+    driver: bridge
+
+volumes:
+  sql_vol:
+    driver: local
+  keycloak_vol:  
+    driver: local  
