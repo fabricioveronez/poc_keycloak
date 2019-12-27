@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
+using POC.Api.Service;
 
 namespace POC.Api
 {
@@ -24,6 +26,15 @@ namespace POC.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped(service =>
+            {
+                return new MongoClient("mongodb://mongouser:GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY@mongodb:27017/admin").GetDatabase("admin");
+            });
+
+            services.AddControllers().AddNewtonsoftJson();
+
+            services.AddTransient<ProdutoService>();
+
             services.AddControllers();
         }
 
@@ -34,6 +45,14 @@ namespace POC.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .WithMethods("*")
+                    .AllowCredentials();
+            });
 
             app.UseRouting();
 

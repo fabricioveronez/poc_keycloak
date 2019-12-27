@@ -43,7 +43,7 @@ namespace POC.Api.Controllers
 
         // PUT: api/Produto/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Produto produto)
+        public void Put(string id, [FromBody] Produto produto)
         {
             this._service.Salvar(produto);
         }

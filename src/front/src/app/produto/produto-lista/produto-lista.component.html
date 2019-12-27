@@ -1,0 +1,16 @@
+<table style="width:100%">
+    <tr>
+        <th></th>
+        <th>EAN</th>
+        <th>Nome</th>
+        <th>Preço</th>
+    </tr>
+    <tr *ngFor="let produto of lista">
+        <td>
+            <a [routerLink]="['/editar', produto.id]">Editar</a>
+        </td>
+        <td>{{produto.ean}}</td>
+        <td>{{produto.nome}}</td>
+        <td>{{produto.preco}}</td>
+    </tr>
+</table>

@@ -1,0 +1,22 @@
+<div class="container">
+    <form (ngSubmit)="salvar($event)">
+        <div class="form-group">
+            <label for="inputEANProduto">EAN:</label>
+            <input type="text" [(ngModel)]="produto.ean" class="form-control" name="inputEANProduto">
+        </div>
+        <div class="form-group">
+            <label for="inputNomeProduto">Nome:</label>
+            <input type="text" [(ngModel)]="produto.nome" class="form-control" name="inputNomeProduto">
+        </div>
+        <div class="form-group">
+            <label for="inputPrecoProduto">Preço:</label>
+            <input type="text" [(ngModel)]="produto.preco" class="form-control" name="inputPrecoProduto">
+        </div>
+        <div class="form-group">
+            <label for="inputDescricaoProduto">Descrição</label>
+            <textarea class="form-control" [(ngModel)]="produto.descricao" name="inputDescricaoProduto"
+                rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+</div>
