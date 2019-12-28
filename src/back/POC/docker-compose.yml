@@ -6,7 +6,8 @@ services:
     build:
       context: .
       dockerfile: POC.Api/Dockerfile
-
+    ports:
+      - "8181:80"    
     networks:
       - poc_net
     environment: 

@@ -5,18 +5,12 @@ export function initializer(keycloak: KeycloakService): () => Promise<any> {
   return (): Promise<any> => keycloak.init({
     config: environment.keycloakConfig,
     initOptions: {
-      onLoad: 'login-required',
-      checkLoginIframe: true
+      // onLoad: 'login-required',
+      checkLoginIframe: true,
+      // flow: 'implicit',
     },
     bearerExcludedUrls: [
-      '\/mtc',
-      '/wordpress',
-      '/events',
-      '/assets',
-      '/releasenotes',
-      '/clients/public',
-      '/twitter/public-timeline',
-      '/pages/forms/datepicker'
+      '/listar',
     ],
     enableBearerInterceptor: true,
     loadUserProfileAtStartUp: false

@@ -4,5 +4,3 @@ services:
   poc.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "8181:80"

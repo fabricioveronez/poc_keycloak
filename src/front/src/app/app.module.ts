@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
 import { initializer } from './utils/app-init';
+import { AppAuthGuard } from './utils/app-auth-guard';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { initializer } from './utils/app-init';
       useFactory: initializer,
       multi: true,
       deps: [KeycloakService]
-    }
+    },
+    AppAuthGuard
   ],
   bootstrap: [AppComponent]
 })

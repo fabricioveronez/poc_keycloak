@@ -7,10 +7,10 @@ import { KeycloakConfig } from 'keycloak-angular';
 // Add here your keycloak setup infos
 let keycloakConfig: KeycloakConfig = {
   url: 'http://localhost:8080/auth/',
-  realm: 'dannemann',
-  clientId: 'account',
+  realm: 'ecardapio',
+  clientId: 'angular',
   "credentials": {
-    "secret": "2f6b4e08-5057-4e41-92e1-c8ba97be89d3"
+    "secret": "04543da8-0d7c-4daf-9864-712ce8e6a3f9"
   }
 };
 
