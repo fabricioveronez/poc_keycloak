@@ -81,12 +81,12 @@ namespace POC.Api
                 };
             });
 
-            //services.AddAuthorization(authorizationOptions =>
-            //{
-            //    authorizationOptions.AddPolicy("editar_produto", new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
-            //        .RequireAuthenticatedUser()
-            //        .Build());
-            //});
+            services.AddAuthorization(authorizationOptions =>
+            {
+                authorizationOptions.AddPolicy("editar_produto", new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser()
+                    .Build());
+            });
 
             services.AddControllers().AddNewtonsoftJson();
 
