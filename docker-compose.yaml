@@ -1,0 +1,48 @@
+version: '3.4'
+
+services:
+  poc.api:
+    image: fabricioveronez/pocapi
+    build:
+      context: ./src/back/POC
+      dockerfile: ./POC.Api/Dockerfile
+    ports:
+      - "8181:80"    
+    networks:
+      - poc_net
+    depends_on: 
+      - mongodb
+    environment: 
+      MONGODB_CONNECTIONSTRING: mongodb://mongouser:GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY@mongodb:27017/admin
+      MONGODB_DATABASE: admin
+      IDENTITY_AUTHORITY: <Authority>
+      IDENTITY_AUDIENCE: <Audience>
+      IDENTITY_METADATAADDRESS: <MetadataAddress>
+
+  mongodb:
+    image: mongo:4.2.2
+    volumes:
+      - db_mongo:/data/db
+    networks:
+      - poc_net
+    restart: always
+    command: --storageEngine wiredTiger
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY
+
+  front:
+    image: fabricioveronez/pocui
+    build:
+      context: ./src/front
+      dockerfile: ./Dockerfile
+    ports:
+      - "4200:80"      
+    depends_on: 
+      - poc.api        
+
+volumes:
+  db_mongo:
+networks: 
+  poc_net: 
+    driver: bridge

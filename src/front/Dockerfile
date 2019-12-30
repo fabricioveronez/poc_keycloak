@@ -1,8 +1,9 @@
 FROM node:10-alpine as builder
-RUN npm install -g @angular/cli@8.3.3 typescript@3.6.2 
-COPY ./ /app/
 WORKDIR /app
-RUN yarn
+RUN npm install -g @angular/cli@8.3.3 typescript@3.6.2 
+COPY package*.json ./
+RUN npm install
+COPY ./ /app/
 RUN ng build --prod --aot --optimization --output-path /app-build/
 
 FROM nginx:alpine
