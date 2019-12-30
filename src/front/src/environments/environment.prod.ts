@@ -11,6 +11,6 @@ let keycloakConfig: KeycloakConfig = {
 
 export const environment = {
   production: true,
-  apiURL: 'http://localhost:8181/api',
+  apiURL: '',
   keycloakConfig: keycloakConfig
 };

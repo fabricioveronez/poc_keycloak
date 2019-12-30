@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using POC.Api.Model;
@@ -35,6 +36,7 @@ namespace POC.Api.Controllers
         }
 
         // POST: api/Produto
+        [Authorize(Roles = "editar_produto")]
         [HttpPost]
         public void Post([FromBody] Produto produto)
         {

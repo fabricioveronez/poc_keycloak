@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  mongodb:
+    image: mongo:4.2.2
+    volumes:
+      - db_mongo:/data/db
+    ports: 
+      - "27017:27017"
+    networks:
+      - poc_net
+    restart: always
+    command: --storageEngine wiredTiger
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY
+
+volumes:
+  db_mongo:
+networks: 
+  poc_net: 
+    driver: bridge
