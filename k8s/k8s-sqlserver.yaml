@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-sqlserver
+spec:
+  selector:
+    matchLabels:
+      app: sqlserver
+  template:
+    metadata:
+      labels:
+        app: sqlserver
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: sql
+        image: mcr.microsoft.com/mssql/server:2017-latest
+        # resources:
+        #   limits:
+        #     memory: "1024"
+        #     cpu: 1m
+        #   requests:
+        #     memory: "1024"
+        #     cpu: 1m                
+        env:
+        - name: ACCEPT_EULA
+          value: "Y" 
+        - name: SA_PASSWORD
+          value: "SqlServer@123"          
+        ports:
+        - containerPort: 1433
+          name: banco1
+        - containerPort: 1434
+          name: banco2
+        - containerPort: 443
+          name: banco3
+      #   volumeMounts:
+      #     - mountPath: /var/opt/mssql
+      #       name: volumelocal        
+      # nodeSelector:
+      #   databases: "true"
+      # volumes:
+      # - name: volumelocal
+      #   hostPath:          
+      #     path: /sqlservervolume        
+      
