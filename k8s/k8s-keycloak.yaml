@@ -15,12 +15,12 @@ spec:
       - name: keycloak
         image: jboss/keycloak
         resources:
-          # limits:
-          #   memory: "128Mi"
-          #   cpu: "500m"
-          # requests:
-          #   memory: "128Mi"
-          #   cpu: "500m"            
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+          requests:
+            memory: "1Gi"
+            cpu: "500m"            
         env:
         - name: DB_VENDOR
           value: mssql           
@@ -36,9 +36,9 @@ spec:
           value: admin
         - name: KEYCLOAK_PASSWORD
           value: Pa55w0rd    
-        - name: KEYCLOAK_LOGLEVEL
-          value: DEBUG         
-        - name: ROOT_LOGLEVEL
-          value: DEBUG                                                 
+        # - name: KEYCLOAK_LOGLEVEL
+        #   value: DEBUG         
+        # - name: ROOT_LOGLEVEL
+        #   value: DEBUG                                                 
         ports:
         - containerPort: 8080
