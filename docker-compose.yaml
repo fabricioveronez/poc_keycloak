@@ -35,9 +35,19 @@ services:
     depends_on:
       - keycloak_db
 
+  webui:
+    image: fabricioveronez/webui:latest      
+    build:
+      context: src/front
+      dockerfile: Dockerfile
+    ports:
+      - 8181:80       
+    depends_on:
+      - keycloak      
+
 networks: 
   keycloak_net:
-    external: true
+    driver: bridge
 
 volumes:
   sql_vol:

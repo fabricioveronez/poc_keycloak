@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using POC.Api.Model;
 using POC.Api.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace POC.Api.Controllers
 {
@@ -20,6 +21,7 @@ namespace POC.Api.Controllers
             this._service = service;
         }
 
+        [Authorize]
         // GET: api/Produto
         [HttpGet]
         public IEnumerable<Produto> Get()
@@ -35,6 +37,7 @@ namespace POC.Api.Controllers
         }
 
         // POST: api/Produto
+        //[Authorize]
         [HttpPost]
         public void Post([FromBody] Produto produto)
         {

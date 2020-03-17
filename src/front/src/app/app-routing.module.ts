@@ -8,7 +8,8 @@ import { AppAuthGuard } from './utils/app-auth-guard';
 
 const routes: Routes = [
     { path: 'editar/:id', component: ProdutoEditarComponent, canActivate: [AppAuthGuard] },
-    { path: 'editar', component: ProdutoEditarComponent, canActivate: [AppAuthGuard] },
+    { path: 'editar', component: ProdutoEditarComponent },
+    // { path: 'editar', component: ProdutoEditarComponent, canActivate: [AppAuthGuard] },
     { path: 'listar', component: ProdutoListaComponent },
     { path: '', redirectTo: '/listar', pathMatch: 'full' }
 ];

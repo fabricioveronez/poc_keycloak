@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using POC.Api.Service;
 
 namespace POC.Api
@@ -28,13 +29,25 @@ namespace POC.Api
         {
             services.AddScoped(service =>
             {
-                return new MongoClient("mongodb://mongouser:GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY@mongodb:27017/admin").GetDatabase("admin");
+                return new MongoClient("mongodb://mongouser:GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY@localhost:27017/admin").GetDatabase("admin");
+            });
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(o =>
+            {
+                o.Authority = "http://localhost:8080/auth/realms/ecardapio";
+                o.Audience = "account";
+                o.SaveToken = true;                
+                o.RequireHttpsMetadata = false;
+                o.IncludeErrorDetails = true;
+                o.MetadataAddress = "http://localhost:8080/auth/realms/ecardapio/.well-known/openid-configuration";
             });
 
             services.AddControllers().AddNewtonsoftJson();
-
             services.AddTransient<ProdutoService>();
-
             services.AddControllers();
         }
 
@@ -55,9 +68,7 @@ namespace POC.Api
             });
 
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

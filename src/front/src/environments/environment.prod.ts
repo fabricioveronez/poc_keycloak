@@ -1,9 +1,9 @@
 import { KeycloakConfig } from 'keycloak-angular';
 
 let keycloakConfig: KeycloakConfig = {
-  url: 'http://KEYCLOAK-IP:8088/auth',
-  realm: 'your-realm-name',
-  clientId: 'your-client-id',
+  url: 'http://192.168.0.12:8080/auth',
+  realm: 'poc',
+  clientId: 'account',
   "credentials": {
     "secret": "your-client-secret"
   }
@@ -11,6 +11,6 @@ let keycloakConfig: KeycloakConfig = {
 
 export const environment = {
   production: true,
-  apiURL: 'http://localhost:8181/api',
+  apiURL: 'http://192.168.0.12:8282/api',
   keycloakConfig: keycloakConfig
 };

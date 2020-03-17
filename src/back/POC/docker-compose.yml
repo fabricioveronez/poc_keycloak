@@ -10,6 +10,7 @@ services:
       - "8181:80"    
     networks:
       - poc_net
+      - keycloak_net
     environment: 
       MONGO_CONNECTIONSTRING: mongodb://mongouser:GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY@mongodb:27017/admin
       MONGO_DATABASE: admin
@@ -31,3 +32,5 @@ volumes:
 networks: 
   poc_net: 
     driver: bridge
+  keycloak_net:
+    external: true    
