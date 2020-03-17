@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sqlserver-service
+spec:
+  selector:
+    app: sqlserver
+  type: NodePort
+  ports:
+  - port: 1433
+    targetPort: 1433
+    name: banco1
+  - port: 1434
+    targetPort: 1434
+    name: banco2    
+  - port: 443
+    targetPort: 443
+    name: banco3        

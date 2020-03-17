@@ -10,7 +10,7 @@ let keycloakConfig: KeycloakConfig = {
   realm: 'poc',
   clientId: 'account',
   "credentials": {
-    "secret": "04543da8-0d7c-4daf-9864-712ce8e6a3f9"
+    "secret": "your-client-secret"
   }
 };
 

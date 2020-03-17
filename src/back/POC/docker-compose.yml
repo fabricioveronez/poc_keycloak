@@ -12,8 +12,11 @@ services:
       - poc_net
       - keycloak_net
     environment: 
-      MONGO_CONNECTIONSTRING: mongodb://mongouser:GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY@mongodb:27017/admin
-      MONGO_DATABASE: admin
+      MONGODB_CONNECTIONSTRING: mongodb://mongouser:GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY@mongodb:27017/admin
+      MONGODB_DATABASE: admin
+      IDENTITY_AUTHORITY: <Authority>
+      IDENTITY_AUDIENCE: <Audience>
+      IDENTITY_METADATAADDRESS: <MetadataAddress>
 
   mongodb:
     image: mongo:4.2.2

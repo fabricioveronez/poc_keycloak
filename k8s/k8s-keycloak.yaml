@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak-deployment
+spec:
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+      - name: keycloak
+        image: jboss/keycloak
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+          requests:
+            memory: "1Gi"
+            cpu: "500m"            
+        env:
+        - name: DB_VENDOR
+          value: mssql           
+        - name: DB_ADDR
+          value: sqlserver-service
+        - name: DB_DATABASE
+          value: Keycloak
+        - name: DB_USER
+          value: sa
+        - name: DB_PASSWORD
+          value: SqlServer@123
+        - name: KEYCLOAK_USER
+          value: admin
+        - name: KEYCLOAK_PASSWORD
+          value: Pa55w0rd    
+        # - name: KEYCLOAK_LOGLEVEL
+        #   value: DEBUG         
+        # - name: ROOT_LOGLEVEL
+        #   value: DEBUG                                                 
+        ports:
+        - containerPort: 8080

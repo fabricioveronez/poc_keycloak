@@ -14,4 +14,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY
 
 volumes:
-  db_mongo: 
+  db_mongo:
+networks: 
+  poc_net: 
+    driver: bridge
