@@ -1,6 +1,18 @@
 version: '3.7'
 
 services:
+  mongodb:
+    image: mongo:4.2.2
+    volumes:
+      - db_mongo:/data/db
+    networks:
+      - keycloak_net
+    restart: always
+    command: --storageEngine wiredTiger
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY
+
   keycloak_db:
     image: "mcr.microsoft.com/mssql/server:2017-latest"
     volumes: 
@@ -35,7 +47,23 @@ services:
     depends_on:
       - keycloak_db
 
-  webui:
+  webapi:
+    image: fabricioveronez/pocapi
+    build:
+      context: src/back/POC
+      dockerfile: POC.Api/Dockerfile
+    ports:
+      - "8383:80"    
+    networks:
+      - keycloak_net
+    environment: 
+      MONGODB_CONNECTIONSTRING: mongodb://mongouser:GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY@mongodb:27017/admin
+      MONGODB_DATABASE: admin
+      IDENTITY_AUTHORITY: <Authority>
+      IDENTITY_AUDIENCE: <Audience>
+      IDENTITY_METADATAADDRESS: <MetadataAddress>      
+
+  webui:  
     image: fabricioveronez/webui:latest      
     build:
       context: src/front
@@ -43,7 +71,21 @@ services:
     ports:
       - 8181:80       
     depends_on:
-      - keycloak      
+      - keycloak  
+    networks: 
+      - keycloak_net           
+    
+  nginx:
+    image: nginx
+    ports: 
+     - 80:80
+    volumes: 
+      - ./nginx.default.conf:/etc/nginx/nginx.conf
+    networks: 
+      - keycloak_net    
+    depends_on:
+      - keycloak    
+      - webui       
 
 networks: 
   keycloak_net:
@@ -53,4 +95,6 @@ volumes:
   sql_vol:
     driver: local
   keycloak_vol:  
+    driver: local  
+  db_mongo:
     driver: local  

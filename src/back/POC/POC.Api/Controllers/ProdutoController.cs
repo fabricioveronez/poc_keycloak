@@ -22,7 +22,7 @@ namespace POC.Api.Controllers
             this._service = service;
         }
 
-        [Authorize]
+        //[Authorize]
         // GET: api/Produto
         [HttpGet]
         public IEnumerable<Produto> Get()

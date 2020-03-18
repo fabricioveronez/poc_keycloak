@@ -36,4 +36,4 @@ networks:
   poc_net: 
     driver: bridge
   keycloak_net:
-    external: true    
+    driver: bridge

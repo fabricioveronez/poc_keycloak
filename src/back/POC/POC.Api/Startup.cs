@@ -41,9 +41,11 @@ namespace POC.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHealthChecks();
+
             services.AddScoped(service =>
             {
-                return new MongoClient("mongodb://mongouser:GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY@localhost:27017/admin").GetDatabase("admin");
+                return new MongoClient("mongodb://mongouser:GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY@mongodb:27017/admin").GetDatabase("admin");
             });
 
             services.AddAuthentication(options =>
@@ -87,22 +89,21 @@ namespace POC.Api
                 authorizationOptions.AddPolicy("editar_produto", new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser()
                     .Build());
->>>>>>> ac26c6ba39436d050b1ce488ca54315c0fb38126
             });
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(o =>
-            {
-                o.Authority = "http://localhost:8080/auth/realms/ecardapio";
-                o.Audience = "account";
-                o.SaveToken = true;                
-                o.RequireHttpsMetadata = false;
-                o.IncludeErrorDetails = true;
-                o.MetadataAddress = "http://localhost:8080/auth/realms/ecardapio/.well-known/openid-configuration";
-            });
+            // services.AddAuthentication(options =>
+            // {
+            //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            // }).AddJwtBearer(o =>
+            // {
+            //     o.Authority = "http://localhost:8080/auth/realms/ecardapio";
+            //     o.Audience = "account";
+            //     o.SaveToken = true;                
+            //     o.RequireHttpsMetadata = false;
+            //     o.IncludeErrorDetails = true;
+            //     o.MetadataAddress = "http://localhost:8080/auth/realms/ecardapio/.well-known/openid-configuration";
+            // });
 
             services.AddControllers().AddNewtonsoftJson();
             services.AddTransient<ProdutoService>();
@@ -126,14 +127,10 @@ namespace POC.Api
 
             app.UseRouting();
             app.UseAuthorization();
-<<<<<<< HEAD
-=======
-            app.UseAuthentication();
-
->>>>>>> ac26c6ba39436d050b1ce488ca54315c0fb38126
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }
