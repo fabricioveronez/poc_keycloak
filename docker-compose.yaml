@@ -59,9 +59,9 @@ services:
     environment: 
       MONGODB_CONNECTIONSTRING: mongodb://mongouser:GPX4WOwpcvOc9Wm70gAG8It7tKA0Cy090ZVO82cEJsExogsMDY@mongodb:27017/admin
       MONGODB_DATABASE: admin
-      IDENTITY_AUTHORITY: <Authority>
-      IDENTITY_AUDIENCE: <Audience>
-      IDENTITY_METADATAADDRESS: <MetadataAddress>      
+      IDENTITY_AUTHORITY: http://id.veronez.net/auth/realms/poc
+      IDENTITY_AUDIENCE: account
+      IDENTITY_METADATAADDRESS: http://id.veronez.net/auth/realms/poc/.well-known/openid-configuration
 
   webui:  
     image: fabricioveronez/webui:latest      

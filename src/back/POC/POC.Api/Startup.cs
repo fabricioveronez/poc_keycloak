@@ -119,11 +119,12 @@ namespace POC.Api
 
             app.UseCors(builder =>
             {
-                builder.WithOrigins("http://localhost:4200")
+                builder.WithOrigins("http://veronez.net")
                     .AllowAnyHeader()
                     .WithMethods("*")
                     .AllowCredentials();
             });
+
 
             app.UseRouting();
             app.UseAuthorization();

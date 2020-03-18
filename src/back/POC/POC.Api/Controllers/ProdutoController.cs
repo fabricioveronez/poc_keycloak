@@ -38,7 +38,7 @@ namespace POC.Api.Controllers
         }
 
         // POST: api/Produto
-        [Authorize(policy: "editar_produto")]
+        //[Authorize(policy: "editar_produto")]
         [HttpPost]
         public void Post([FromBody] Produto produto)
         {

@@ -1,7 +1,7 @@
 import { KeycloakConfig } from 'keycloak-angular';
 
 let keycloakConfig: KeycloakConfig = {
-  url: 'http://id.poc.com.br/auth',
+  url: 'http://id.veronez.net/auth',
   realm: 'poc',
   clientId: 'account',
   "credentials": {
@@ -11,6 +11,6 @@ let keycloakConfig: KeycloakConfig = {
 
 export const environment = {
   production: true,
-  apiURL: 'http://api.poc.com.br/api',
+  apiURL: 'http://api.veronez.net/api',
   keycloakConfig: keycloakConfig
 };
