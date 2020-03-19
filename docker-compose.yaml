@@ -33,7 +33,10 @@ services:
       - keycloak_net
     restart: always    
     volumes:
-      - keycloak_vol:/opt/jboss/keycloak/realm-config    
+      - keycloak_vol:/opt/jboss/keycloak/realm-config   
+      #- ./module.xml:/opt/jboss/keycloak/modules/com/github/thomasdarimont/keycloak/extensions/keycloak-health-checks/main/module.xml
+      #- ./standalone-ha.xml:/opt/jboss/keycloak/standalone/configuration/standalone-ha.xml
+      #- ./standalone.xml:/opt/jboss/keycloak/standalone/configuration/standalone.xml
     environment:
       DB_VENDOR: mssql
       DB_ADDR: keycloak_db
@@ -44,6 +47,7 @@ services:
       KEYCLOAK_PASSWORD: Pa55w0rd
     ports:
       - 8080:8080
+      - 9990:9990
     depends_on:
       - keycloak_db
 
